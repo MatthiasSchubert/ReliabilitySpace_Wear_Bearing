@@ -104,3 +104,18 @@ TermSocket.open: 1
 not able to serialize: expected string or bytes-like object
 TermSocket.open: Opened 1
 [I 14:54:08.337 NotebookApp] Saving file at /requirements.txt
+[W 14:58:39.224 NotebookApp] Notebook index.ipynb is not trusted
+[I 14:58:39.830 NotebookApp] Kernel started: 3a4df848-3960-4d43-9ce5-04294c565446, name: python3
+[I 15:00:39.579 NotebookApp] Saving file at /index.ipynb
+[W 15:00:39.580 NotebookApp] Notebook index.ipynb is not trusted
+[W 15:09:08.516 NotebookApp] Culling 'idle' kernel 'python3' (3a4df848-3960-4d43-9ce5-04294c565446) with 1 connections due to 627 seconds of inactivity.
+[I 15:09:08.517 NotebookApp] Kernel shutdown: 3a4df848-3960-4d43-9ce5-04294c565446
+[I 15:23:11.757 NotebookApp] Kernel started: c1a3b9eb-c37c-4e9f-8ca9-66813fe82b26, name: python3
+[I 15:24:09.721 NotebookApp] Kernel restarted: c1a3b9eb-c37c-4e9f-8ca9-66813fe82b26
+[I 15:24:09.843 NotebookApp] Starting buffering for c1a3b9eb-c37c-4e9f-8ca9-66813fe82b26:44525287-6c1e-41a4-8265-55b895213b67
+[I 15:24:10.080 NotebookApp] Restoring connection for c1a3b9eb-c37c-4e9f-8ca9-66813fe82b26:44525287-6c1e-41a4-8265-55b895213b67
+[I 15:24:39.856 NotebookApp] Saving file at /index.ipynb
+[I 15:26:40.144 NotebookApp] Saving file at /index.ipynb
+[I 15:27:02.378 NotebookApp] Kernel restarted: c1a3b9eb-c37c-4e9f-8ca9-66813fe82b26
+[I 15:27:02.499 NotebookApp] Starting buffering for c1a3b9eb-c37c-4e9f-8ca9-66813fe82b26:44525287-6c1e-41a4-8265-55b895213b67
+[I 15:27:02.747 NotebookApp] Restoring connection for c1a3b9eb-c37c-4e9f-8ca9-66813fe82b26:44525287-6c1e-41a4-8265-55b895213b67
