@@ -120,3 +120,25 @@ TermSocket.open: Opened 1
 [I 15:27:02.499 NotebookApp] Starting buffering for c1a3b9eb-c37c-4e9f-8ca9-66813fe82b26:44525287-6c1e-41a4-8265-55b895213b67
 [I 15:27:02.747 NotebookApp] Restoring connection for c1a3b9eb-c37c-4e9f-8ca9-66813fe82b26:44525287-6c1e-41a4-8265-55b895213b67
 [I 15:28:40.414 NotebookApp] Saving file at /index.ipynb
+[W 15:37:08.517 NotebookApp] Culling 'idle' kernel 'python3' (c1a3b9eb-c37c-4e9f-8ca9-66813fe82b26) with 1 connections due to 600 seconds of inactivity.
+[I 15:37:08.518 NotebookApp] Kernel shutdown: c1a3b9eb-c37c-4e9f-8ca9-66813fe82b26
+[I 15:44:08.400 NotebookApp] Kernel started: 25e470d8-3b6b-45d9-8ff0-e8fa0cb7422d, name: python3
+[I 15:44:44.449 NotebookApp] Saving file at /index.ipynb
+[W 15:55:08.517 NotebookApp] Culling 'idle' kernel 'python3' (25e470d8-3b6b-45d9-8ff0-e8fa0cb7422d) with 1 connections due to 656 seconds of inactivity.
+[I 15:55:08.517 NotebookApp] Kernel shutdown: 25e470d8-3b6b-45d9-8ff0-e8fa0cb7422d
+[I 16:21:55.644 NotebookApp] Kernel started: c1aee651-6f08-49f7-ab08-7db796a9106d, name: python3
+[I 16:23:39.432 NotebookApp] Saving file at /index.ipynb
+[I 16:24:13.604 NotebookApp] Kernel restarted: c1aee651-6f08-49f7-ab08-7db796a9106d
+[I 16:24:13.728 NotebookApp] Starting buffering for c1aee651-6f08-49f7-ab08-7db796a9106d:207e40a4-5b82-4b86-a4a1-f865cd01576c
+[I 16:24:13.966 NotebookApp] Restoring connection for c1aee651-6f08-49f7-ab08-7db796a9106d:207e40a4-5b82-4b86-a4a1-f865cd01576c
+[I 16:25:39.700 NotebookApp] Saving file at /index.ipynb
+[I 16:25:48.093 NotebookApp] Kernel restarted: c1aee651-6f08-49f7-ab08-7db796a9106d
+[I 16:25:48.213 NotebookApp] Starting buffering for c1aee651-6f08-49f7-ab08-7db796a9106d:207e40a4-5b82-4b86-a4a1-f865cd01576c
+[I 16:25:48.459 NotebookApp] Restoring connection for c1aee651-6f08-49f7-ab08-7db796a9106d:207e40a4-5b82-4b86-a4a1-f865cd01576c
+[I 16:27:39.977 NotebookApp] Saving file at /index.ipynb
+[I 16:28:16.368 NotebookApp] Kernel restarted: c1aee651-6f08-49f7-ab08-7db796a9106d
+[I 16:28:16.489 NotebookApp] Starting buffering for c1aee651-6f08-49f7-ab08-7db796a9106d:207e40a4-5b82-4b86-a4a1-f865cd01576c
+[I 16:28:16.767 NotebookApp] Restoring connection for c1aee651-6f08-49f7-ab08-7db796a9106d:207e40a4-5b82-4b86-a4a1-f865cd01576c
+[I 16:29:40.260 NotebookApp] Saving file at /index.ipynb
+[W 16:39:08.517 NotebookApp] Culling 'idle' kernel 'python3' (c1aee651-6f08-49f7-ab08-7db796a9106d) with 1 connections due to 646 seconds of inactivity.
+[I 16:39:08.518 NotebookApp] Kernel shutdown: c1aee651-6f08-49f7-ab08-7db796a9106d
