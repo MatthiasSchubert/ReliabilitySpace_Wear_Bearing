@@ -57,3 +57,50 @@ TermSocket.open: Opened 2
 [I 14:53:21.495 NotebookApp] Restoring connection for c5801caa-7cbb-4da4-9a8d-b07382168240:a54ea121-3830-48c3-ae2e-04ee057cfb25
 [I 14:55:03.829 NotebookApp] Saving file at /index.ipynb
 [I 14:58:54.549 NotebookApp] Saving file at /index.ipynb
+[W 2021-09-19 14:52:01.539 LabApp] 'ip' has moved from NotebookApp to ServerApp. This config will be passed to ServerApp. Be sure to update your config before our next release.
+[W 2021-09-19 14:52:01.539 LabApp] 'port' has moved from NotebookApp to ServerApp. This config will be passed to ServerApp. Be sure to update your config before our next release.
+[W 2021-09-19 14:52:01.539 LabApp] 'base_url' has moved from NotebookApp to ServerApp. This config will be passed to ServerApp. Be sure to update your config before our next release.
+[W 2021-09-19 14:52:01.539 LabApp] 'token' has moved from NotebookApp to ServerApp. This config will be passed to ServerApp. Be sure to update your config before our next release.
+[W 2021-09-19 14:52:01.539 LabApp] 'trust_xheaders' has moved from NotebookApp to ServerApp. This config will be passed to ServerApp. Be sure to update your config before our next release.
+[W 2021-09-19 14:52:01.539 LabApp] 'trust_xheaders' has moved from NotebookApp to ServerApp. This config will be passed to ServerApp. Be sure to update your config before our next release.
+[W 2021-09-19 14:52:01.539 LabApp] 'allow_origin' has moved from NotebookApp to ServerApp. This config will be passed to ServerApp. Be sure to update your config before our next release.
+[W 2021-09-19 14:52:01.539 LabApp] 'allow_origin_pat' has moved from NotebookApp to ServerApp. This config will be passed to ServerApp. Be sure to update your config before our next release.
+[W 2021-09-19 14:52:01.539 LabApp] 'extra_template_paths' was found in both NotebookApp and ServerApp. This is likely a recent change. This config will only be set in NotebookApp. Please check if you should also config these traits in ServerApp for your purpose.
+[W 2021-09-19 14:52:01.539 LabApp] 'jinja_template_vars' was found in both NotebookApp and ServerApp. This is likely a recent change. This config will only be set in NotebookApp. Please check if you should also config these traits in ServerApp for your purpose.
+[W 2021-09-19 14:52:01.539 LabApp] 'shutdown_no_activity_timeout' has moved from NotebookApp to ServerApp. This config will be passed to ServerApp. Be sure to update your config before our next release.
+[W 2021-09-19 14:52:01.539 LabApp] 'tornado_settings' has moved from NotebookApp to ServerApp. This config will be passed to ServerApp. Be sure to update your config before our next release.
+[W 2021-09-19 14:52:01.539 LabApp] 'tornado_settings' has moved from NotebookApp to ServerApp. This config will be passed to ServerApp. Be sure to update your config before our next release.
+[I 2021-09-19 14:52:01.545 LabApp] JupyterLab extension loaded from /srv/conda/envs/notebook/lib/python3.7/site-packages/jupyterlab
+[I 2021-09-19 14:52:01.545 LabApp] JupyterLab application directory is /srv/conda/envs/notebook/share/jupyter/lab
+[I 14:52:01.563 NotebookApp] nteract extension loaded from /srv/conda/envs/notebook/lib/python3.7/site-packages/nteract_on_jupyter
+[I 14:52:01.565 NotebookApp] Will shut down after 600 seconds with no kernels or terminals.
+[I 14:52:01.565 NotebookApp] Serving notebooks from local directory: /home/jovyan
+[I 14:52:01.565 NotebookApp] Jupyter Notebook 6.3.0 is running at:
+[I 14:52:01.565 NotebookApp] http://jupyter-matthiasschuber-2dce-5fwear-5fbearing-2drha7ir66:8888/user/matthiasschuber-ce_wear_bearing-rha7ir66/?token=...
+[I 14:52:01.565 NotebookApp]  or http://127.0.0.1:8888/user/matthiasschuber-ce_wear_bearing-rha7ir66/?token=...
+[I 14:52:01.565 NotebookApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
+[W 14:52:01.570 NotebookApp] No web browser found: could not locate runnable browser.
+[I 14:52:01.573 NotebookApp] 302 GET /user/matthiasschuber-ce_wear_bearing-rha7ir66/ (10.0.21.36) 0.830000ms
+[I 14:52:02.081 NotebookApp] 302 GET /user/matthiasschuber-ce_wear_bearing-rha7ir66/?token=7bVHpNjCSm-Wevx_kZ_WDQ (92.104.221.228) 0.770000ms
+[I 14:52:03.959 NotebookApp] 301 GET /user/matthiasschuber-ce_wear_bearing-rha7ir66/static/favicons/favicon.ico (92.104.221.228) 0.930000ms
+[I 2021-09-19 14:52:07.368 LabApp] Build is up to date
+/srv/conda/envs/notebook/lib/python3.7/json/encoder.py:257: UserWarning: date_default is deprecated since jupyter_client 7.0.0. Use jupyter_client.jsonutil.json_default.
+  return _iterencode(o, 0)
+[W 14:52:07.772 NotebookApp] 404 GET /user/matthiasschuber-ce_wear_bearing-rha7ir66/terminals/websocket/2 (92.104.221.228) 48.320000ms referer=None
+[W 14:52:07.846 NotebookApp] Notebook index.ipynb is not trusted
+[I 14:52:08.515 NotebookApp] Kernel started: b25d639c-f0a1-4748-a468-6bc5e103e3aa, name: python3
+[I 14:52:08.515 NotebookApp] Culling kernels with idle durations > 600 seconds at 60 second intervals ...
+[I 14:52:08.515 NotebookApp] Culling kernels even with connected clients
+/srv/conda/envs/notebook/lib/python3.7/json/encoder.py:257: UserWarning: date_default is deprecated since jupyter_client 7.0.0. Use jupyter_client.jsonutil.json_default.
+  return _iterencode(o, 0)
+[I 14:52:09.447 NotebookApp] Starting buffering for b25d639c-f0a1-4748-a468-6bc5e103e3aa:44b01f80-9545-41c8-9e1c-c48ac4fbe1aa
+[I 14:52:09.895 NotebookApp] 301 GET /user/matthiasschuber-ce_wear_bearing-rha7ir66/static/favicons/favicon-busy-1.ico (92.104.221.228) 0.650000ms
+[I 14:52:25.678 NotebookApp] Kernel shutdown: b25d639c-f0a1-4748-a468-6bc5e103e3aa
+[W 14:52:26.147 NotebookApp] delete /index.ipynb
+[W 14:53:12.063 NotebookApp] delete /index.html
+[I 14:53:19.290 NotebookApp] Uploading file to /ReliabilitySpace_SimpleWear.ipynb
+[I 14:53:51.299 NotebookApp] New terminal with automatic name: 1
+TermSocket.open: 1
+not able to serialize: expected string or bytes-like object
+TermSocket.open: Opened 1
+[I 14:54:08.337 NotebookApp] Saving file at /requirements.txt
