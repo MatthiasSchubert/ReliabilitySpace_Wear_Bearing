@@ -142,3 +142,4 @@ TermSocket.open: Opened 1
 [I 16:29:40.260 NotebookApp] Saving file at /index.ipynb
 [W 16:39:08.517 NotebookApp] Culling 'idle' kernel 'python3' (c1aee651-6f08-49f7-ab08-7db796a9106d) with 1 connections due to 646 seconds of inactivity.
 [I 16:39:08.518 NotebookApp] Kernel shutdown: c1aee651-6f08-49f7-ab08-7db796a9106d
+[I 17:31:39.408 NotebookApp] Saving file at /requirements.txt
