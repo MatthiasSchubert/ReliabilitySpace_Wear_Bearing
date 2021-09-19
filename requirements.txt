@@ -2,4 +2,5 @@ numpy
 ipywidgets
 nbinteract
 scipy
+scipy.stats
 matplotlib
