@@ -13148,7 +13148,8 @@ div#notebook {
 <p>Solid lubricant wear modelling is described taking example in a ball bearing. The modelling is applicable to other cases of solid lubricant wear, however, the number of revolution has to be substituted with another measure of sliding distance. 
 For solid lubricant reservoir wear (e.g. cage of a ball bearing), the limit state function for the adhesive wear model is formulated as follows:</p>
 <p>$g\left( {\bf{X}} \right) = {V_{{\rm{limit}}}} - \Theta  \cdot \sum\limits_{i = 1}^{{n_p}} {{K_{H,i}} \cdot {\alpha _i} \cdot re{v_i}}$</p>
-<p>Where $\alpha$ denotes the average work of ball/cage interaction forces per revolution and $rev_i$ the number of revolutions in time interval $i$ . The parameter $\alpha$ will typically be estimated from tests and is, thus dependent on the wear rate $K_H$ , which is used to estimate $\alpha$ from the test results. Therefore, $K_H$ cannot be easily taken out of the sum.</p>
+<p>Where $\alpha$ denotes the average work of ball/cage interaction forces per revolution and $rev_i$ the number of revolutions in time interval $i$ . The parameter $\alpha$ will typically be estimated from tests and is, thus dependent on the wear rate $K_H$ , which is used to estimate $\alpha$ from the test results. Therefore, $K_H$ cannot be easily taken out of the sum.
+Presently, the distribution type cannot be changed.</p>
 
 </div>
 </div>
@@ -13326,7 +13327,7 @@ For solid lubricant reservoir wear (e.g. cage of a ball bearing), the limit stat
     }
 
     var interact = new window.NbInteract({
-      spec: 'MatthiasSchubert/ReliabilitySpace_Wear_Bearing/main',
+      spec: 'MatthiasSchubert/ReliabilitySpace_Wear_Bearing/master',
       baseUrl: 'https://mybinder.org',
       provider: 'gh',
     })
