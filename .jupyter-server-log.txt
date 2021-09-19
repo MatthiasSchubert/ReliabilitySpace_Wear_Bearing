@@ -119,3 +119,4 @@ TermSocket.open: Opened 1
 [I 15:27:02.378 NotebookApp] Kernel restarted: c1a3b9eb-c37c-4e9f-8ca9-66813fe82b26
 [I 15:27:02.499 NotebookApp] Starting buffering for c1a3b9eb-c37c-4e9f-8ca9-66813fe82b26:44525287-6c1e-41a4-8265-55b895213b67
 [I 15:27:02.747 NotebookApp] Restoring connection for c1a3b9eb-c37c-4e9f-8ca9-66813fe82b26:44525287-6c1e-41a4-8265-55b895213b67
+[I 15:28:40.414 NotebookApp] Saving file at /index.ipynb
