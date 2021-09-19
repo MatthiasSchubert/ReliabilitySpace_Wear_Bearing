@@ -156,3 +156,11 @@ TermSocket.open: Opened 1
 [I 18:04:08.522 NotebookApp] Kernel shutdown: ef5a1d37-050c-4ff9-b7c0-30d2de177dbf
 [I 18:27:53.142 NotebookApp] Kernel started: 8a6cb813-9202-42cd-b2cd-04afdbd259b3, name: python3
 [I 18:28:39.346 NotebookApp] Saving file at /index.ipynb
+[I 18:33:17.665 NotebookApp] Kernel restarted: 8a6cb813-9202-42cd-b2cd-04afdbd259b3
+[I 18:33:17.787 NotebookApp] Starting buffering for 8a6cb813-9202-42cd-b2cd-04afdbd259b3:68a0e6d1-23a7-4ff0-adb7-8da0b5e1cb9f
+[I 18:33:18.065 NotebookApp] Restoring connection for 8a6cb813-9202-42cd-b2cd-04afdbd259b3:68a0e6d1-23a7-4ff0-adb7-8da0b5e1cb9f
+[I 18:34:40.339 NotebookApp] Saving file at /index.ipynb
+[I 18:40:34.544 NotebookApp] Kernel restarted: 8a6cb813-9202-42cd-b2cd-04afdbd259b3
+[I 18:40:34.670 NotebookApp] Starting buffering for 8a6cb813-9202-42cd-b2cd-04afdbd259b3:68a0e6d1-23a7-4ff0-adb7-8da0b5e1cb9f
+[I 18:40:34.950 NotebookApp] Restoring connection for 8a6cb813-9202-42cd-b2cd-04afdbd259b3:68a0e6d1-23a7-4ff0-adb7-8da0b5e1cb9f
+[I 18:40:40.672 NotebookApp] Saving file at /index.ipynb
