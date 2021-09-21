@@ -13119,14 +13119,13 @@ div#notebook {
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="reliability.space">reliability.space<a class="anchor-link" href="#reliability.space">&#182;</a></h1><h1 id="simplified-reliability-prediction">simplified reliability prediction<a class="anchor-link" href="#simplified-reliability-prediction">&#182;</a></h1><h1 id="Bearing:-----solid-lubricant-wear-model">Bearing:     solid lubricant wear model<a class="anchor-link" href="#Bearing:-----solid-lubricant-wear-model">&#182;</a></h1>
+<h1 id="reliability.space">reliability.space<a class="anchor-link" href="#reliability.space">&#182;</a></h1><h1 id="Reliability-Prediction---FORM">Reliability Prediction - FORM<a class="anchor-link" href="#Reliability-Prediction---FORM">&#182;</a></h1><h1 id="Bearing:-----solid-lubricant-wear-model">Bearing:     solid lubricant wear model<a class="anchor-link" href="#Bearing:-----solid-lubricant-wear-model">&#182;</a></h1>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>by Matthias Schubert, 2021-09-20</p>
-
+<h1 id="by-Matthias-Schubert,-2021-09-20">by Matthias Schubert, 2021-09-20<a class="anchor-link" href="#by-Matthias-Schubert,-2021-09-20">&#182;</a></h1>
 </div>
 </div>
 </div>
@@ -13148,8 +13147,8 @@ div#notebook {
 <p>Solid lubricant wear modelling is described taking example in a ball bearing. The modelling is applicable to other cases of solid lubricant wear, however, the number of revolution has to be substituted with another measure of sliding distance. 
 For solid lubricant reservoir wear (e.g. cage of a ball bearing), the limit state function for the adhesive wear model is formulated as follows:</p>
 <p>$g\left( {\bf{X}} \right) = {V_{{\rm{limit}}}} - \Theta  \cdot \sum\limits_{i = 1}^{{n_p}} {{K_{H,i}} \cdot {\alpha _i} \cdot re{v_i}}$</p>
-<p>Where $\alpha$ denotes the average work of ball/cage interaction forces per revolution and $rev_i$ the number of revolutions in time interval $i$ . The parameter $\alpha$ will typically be estimated from tests and is, thus dependent on the wear rate $K_H$ , which is used to estimate $\alpha$ from the test results. Therefore, $K_H$ cannot be easily taken out of the sum.
-Presently, the distribution type cannot be changed.</p>
+<p>Where $\alpha$ denotes the average work of ball/cage interaction forces per revolution and $rev_i$ the number of revolutions in time interval $i$ . The parameter $\alpha$ will typically be estimated from tests and is, thus dependent on the wear rate $K_H$ , which is used to estimate $\alpha$ from the test results. Therefore, $K_H$ cannot be easily taken out of the sum.</p>
+<p>The following calculation is done by using First Order Reliability Analysis (FORM) for one time interval i=1.</p>
 
 </div>
 </div>
@@ -13169,11 +13168,13 @@ Presently, the distribution type cannot be changed.</p>
 <span class="kn">import</span> <span class="nn">ipywidgets</span> <span class="k">as</span> <span class="nn">widgets</span> 
 <span class="kn">from</span> <span class="nn">ipywidgets</span> <span class="kn">import</span> <span class="n">interact</span><span class="p">,</span> <span class="n">Layout</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">scipy</span>
 <span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span>
 <span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
 <span class="kn">from</span> <span class="nn">ipywidgets</span> <span class="kn">import</span> <span class="n">interact</span>
 <span class="kn">import</span> <span class="nn">nbinteract</span> <span class="k">as</span> <span class="nn">nbi</span>
+
+<span class="kn">import</span> <span class="nn">pyre</span>
+<span class="kn">from</span> <span class="nn">pyre</span> <span class="kn">import</span> <span class="o">*</span>
 </pre></div>
 
     </div>
@@ -13203,7 +13204,6 @@ Presently, the distribution type cannot be changed.</p>
     <span class="n">nu_theta_val</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">COV_MU</span><span class="p">)</span>
     <span class="n">rev_val</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">E_nrev</span><span class="p">)</span>
 
-
     <span class="n">rev_min</span><span class="o">=</span><span class="n">rev_val</span><span class="o">*</span><span class="mf">0.5</span><span class="p">;</span>  <span class="c1">#for plotting</span>
     <span class="n">rev_max</span><span class="o">=</span><span class="n">rev_val</span><span class="o">*</span><span class="mi">2</span><span class="p">;</span>  <span class="c1">#for plotting</span>
 
@@ -13211,40 +13211,71 @@ Presently, the distribution type cannot be changed.</p>
     <span class="n">rev_hour</span><span class="o">=</span><span class="mi">6</span><span class="p">;</span>
     <span class="c1">######################################################</span>
 
-    <span class="c1"># Transfer parameters</span>
-    <span class="n">E_x1</span> <span class="o">=</span> <span class="n">E_vlimit_val</span><span class="p">;</span>
-    <span class="n">nu_x1</span> <span class="o">=</span> <span class="n">nu_vlimit_val</span><span class="p">;</span>
-    <span class="n">nu_KH_alpha</span> <span class="o">=</span> <span class="n">E_KH_val</span><span class="o">*</span><span class="n">nu_KH_val</span> <span class="o">*</span> <span class="n">E_alpha_val</span><span class="o">*</span><span class="n">nu_alpha_val</span><span class="p">;</span>
-    <span class="n">var_KH</span> <span class="o">=</span> <span class="p">(</span><span class="n">E_KH_val</span><span class="o">*</span><span class="n">nu_KH_val</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">;</span>
-    <span class="n">var_alpha</span> <span class="o">=</span> <span class="p">(</span><span class="n">E_alpha_val</span><span class="o">*</span><span class="n">nu_alpha_val</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">;</span>
-    <span class="n">var_KH_alpha</span> <span class="o">=</span> <span class="n">var_KH</span><span class="o">*</span><span class="n">var_alpha</span> <span class="o">+</span> <span class="n">var_KH</span><span class="o">*</span><span class="n">E_alpha_val</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">var_alpha</span><span class="o">*</span><span class="n">E_KH_val</span><span class="o">**</span><span class="mi">2</span><span class="p">;</span>
-    <span class="n">E_x2</span> <span class="o">=</span> <span class="p">(</span><span class="n">E_KH_val</span><span class="o">*</span><span class="n">E_alpha_val</span> <span class="o">+</span> <span class="n">nu_KH_alpha</span><span class="p">)</span><span class="o">*</span><span class="n">rev_val</span><span class="p">;</span>
-    <span class="n">nu_x2</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">E_x2</span><span class="o">*</span><span class="n">rev_val</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">var_KH_alpha</span><span class="p">);</span>
-  
-    <span class="c1">#Simplifid model - next step is to replace by FORM using</span>
-    <span class="c1">#Hackl toolbox Phyton (documentation: http://hackl.github.io/pyre/; Code: http://github.com/hackl/pyre &lt;http://github.com/hackl/pyre )</span>
-    <span class="n">pf</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">E_theta_val</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">E_x1</span><span class="o">/</span><span class="n">E_x2</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">nu_x1</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">nu_x2</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">nu_theta_val</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)))</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span> <span class="n">nu_theta_val</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span> <span class="p">)</span> <span class="o">+</span> 
-    <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span> <span class="n">nu_x1</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span> <span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span> <span class="n">nu_x2</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span> <span class="p">)));</span>
 
+    <span class="c1"># FORM ANALYSIS PyRe</span>
+    <span class="c1"># Define limit state function</span>
+    <span class="n">limit_state</span> <span class="o">=</span> <span class="n">LimitState</span><span class="p">(</span><span class="k">lambda</span> <span class="n">X1</span><span class="p">,</span><span class="n">X2</span><span class="p">,</span><span class="n">X3</span><span class="p">,</span><span class="n">X4</span><span class="p">:</span> <span class="n">X1</span><span class="o">-</span><span class="n">X2</span><span class="o">*</span><span class="n">X3</span><span class="o">*</span><span class="n">X4</span><span class="o">*</span><span class="n">rev_val</span><span class="p">)</span>
+    <span class="n">stochastic_model</span> <span class="o">=</span> <span class="n">StochasticModel</span><span class="p">()</span>
+    <span class="c1"># Define random variables</span>
+    
+    <span class="k">if</span> <span class="n">Dist_Vlim</span><span class="o">==</span><span class="s1">&#39;Normal&#39;</span><span class="p">:</span>
+        <span class="n">stochastic_model</span><span class="o">.</span><span class="n">addVariable</span><span class="p">(</span> <span class="n">Normal</span><span class="p">(</span><span class="s1">&#39;X1&#39;</span><span class="p">,</span><span class="n">E_vlimit_val</span><span class="p">,</span><span class="n">E_vlimit_val</span><span class="o">*</span><span class="n">nu_vlimit_val</span><span class="p">)</span> <span class="p">)</span>
+    <span class="k">elif</span> <span class="n">Dist_Vlim</span><span class="o">==</span><span class="s1">&#39;LogNormal&#39;</span><span class="p">:</span>
+        <span class="n">stochastic_model</span><span class="o">.</span><span class="n">addVariable</span><span class="p">(</span> <span class="n">Lognormal</span><span class="p">(</span><span class="s1">&#39;X1&#39;</span><span class="p">,</span><span class="n">E_vlimit_val</span><span class="p">,</span><span class="n">E_vlimit_val</span><span class="o">*</span><span class="n">nu_vlimit_val</span><span class="p">)</span> <span class="p">)</span>
+    <span class="k">elif</span> <span class="n">Dist_Vlim</span><span class="o">==</span><span class="s1">&#39;Gumbel&#39;</span><span class="p">:</span>
+        <span class="n">stochastic_model</span><span class="o">.</span><span class="n">addVariable</span><span class="p">(</span> <span class="n">Gumbel</span><span class="p">(</span><span class="s1">&#39;X1&#39;</span><span class="p">,</span><span class="n">E_vlimit_val</span><span class="p">,</span><span class="n">E_vlimit_val</span><span class="o">*</span><span class="n">nu_vlimit_val</span><span class="p">)</span> <span class="p">)</span>
+    
+    <span class="k">if</span> <span class="n">Dist_KH</span><span class="o">==</span><span class="s1">&#39;Normal&#39;</span><span class="p">:</span>
+        <span class="n">stochastic_model</span><span class="o">.</span><span class="n">addVariable</span><span class="p">(</span> <span class="n">Normal</span><span class="p">(</span><span class="s1">&#39;X2&#39;</span><span class="p">,</span><span class="n">E_KH_val</span><span class="p">,</span><span class="n">E_KH_val</span><span class="o">*</span><span class="n">nu_KH_val</span><span class="p">)</span> <span class="p">)</span>
+    <span class="k">elif</span> <span class="n">Dist_KH</span><span class="o">==</span><span class="s1">&#39;LogNormal&#39;</span><span class="p">:</span>
+        <span class="n">stochastic_model</span><span class="o">.</span><span class="n">addVariable</span><span class="p">(</span> <span class="n">Lognormal</span><span class="p">(</span><span class="s1">&#39;X2&#39;</span><span class="p">,</span><span class="n">E_KH_val</span><span class="p">,</span><span class="n">E_KH_val</span><span class="o">*</span><span class="n">nu_KH_val</span><span class="p">)</span> <span class="p">)</span>
+    <span class="k">elif</span> <span class="n">Dist_KH</span><span class="o">==</span><span class="s1">&#39;Gumbel&#39;</span><span class="p">:</span>
+        <span class="n">stochastic_model</span><span class="o">.</span><span class="n">addVariable</span><span class="p">(</span> <span class="n">Gumbel</span><span class="p">(</span><span class="s1">&#39;X2&#39;</span><span class="p">,</span><span class="n">E_KH_val</span><span class="p">,</span><span class="n">E_KH_val</span><span class="o">*</span><span class="n">nu_KH_val</span><span class="p">)</span> <span class="p">)</span>
+    
+    <span class="k">if</span> <span class="n">Dist_alpha</span><span class="o">==</span><span class="s1">&#39;Normal&#39;</span><span class="p">:</span>
+        <span class="n">stochastic_model</span><span class="o">.</span><span class="n">addVariable</span><span class="p">(</span> <span class="n">Normal</span><span class="p">(</span><span class="s1">&#39;X3&#39;</span><span class="p">,</span><span class="n">E_alpha_val</span><span class="p">,</span><span class="n">E_alpha_val</span><span class="o">*</span><span class="n">nu_alpha_val</span><span class="p">)</span> <span class="p">)</span>
+    <span class="k">elif</span> <span class="n">Dist_alpha</span><span class="o">==</span><span class="s1">&#39;LogNormal&#39;</span><span class="p">:</span>
+        <span class="n">stochastic_model</span><span class="o">.</span><span class="n">addVariable</span><span class="p">(</span> <span class="n">Lognormal</span><span class="p">(</span><span class="s1">&#39;X3&#39;</span><span class="p">,</span><span class="n">E_alpha_val</span><span class="p">,</span><span class="n">E_alpha_val</span><span class="o">*</span><span class="n">nu_alpha_val</span><span class="p">)</span> <span class="p">)</span>
+    <span class="k">elif</span> <span class="n">Dist_alpha</span><span class="o">==</span><span class="s1">&#39;Gumbel&#39;</span><span class="p">:</span>
+        <span class="n">stochastic_model</span><span class="o">.</span><span class="n">addVariable</span><span class="p">(</span> <span class="n">Gumbel</span><span class="p">(</span><span class="s1">&#39;X3&#39;</span><span class="p">,</span><span class="n">E_alpha_val</span><span class="p">,</span><span class="n">E_alpha_val</span><span class="o">*</span><span class="n">nu_alpha_val</span><span class="p">)</span> <span class="p">)</span>  
+        
+    <span class="n">stochastic_model</span><span class="o">.</span><span class="n">addVariable</span><span class="p">(</span> <span class="n">Lognormal</span><span class="p">(</span><span class="s1">&#39;X4&#39;</span><span class="p">,</span><span class="n">E_theta_val</span><span class="p">,</span><span class="n">E_theta_val</span><span class="o">*</span><span class="n">nu_theta_val</span><span class="p">)</span> <span class="p">)</span>
+    
+    <span class="n">stochastic_model</span><span class="o">.</span><span class="n">setCorrelation</span><span class="p">(</span> <span class="n">CorrelationMatrix</span><span class="p">([[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span>
+                                                        <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span>
+                                                        <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span>
+                                                        <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]])</span> <span class="p">)</span>
+    
+    <span class="c1"># Set some options (optional)</span>
+    <span class="n">options</span> <span class="o">=</span> <span class="n">AnalysisOptions</span><span class="p">()</span>
+    <span class="c1"># options.printResults(False)</span>
+    
+    <span class="c1"># Performe FORM analysis</span>
+    <span class="n">Analysis</span> <span class="o">=</span> <span class="n">Form</span><span class="p">(</span><span class="n">analysis_options</span><span class="o">=</span><span class="n">options</span><span class="p">,</span> <span class="n">stochastic_model</span><span class="o">=</span><span class="n">stochastic_model</span><span class="p">,</span> <span class="n">limit_state</span><span class="o">=</span><span class="n">limit_state</span><span class="p">)</span>
 
-    <span class="n">rev_mat</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">rev_min</span><span class="p">,</span><span class="n">rev_max</span><span class="p">,</span><span class="mi">50</span><span class="p">);</span>
+    <span class="c1"># Some single results:</span>
+    <span class="n">beta</span> <span class="o">=</span> <span class="n">Analysis</span><span class="o">.</span><span class="n">getBeta</span><span class="p">()</span>
+    <span class="n">pf</span> <span class="o">=</span> <span class="n">Analysis</span><span class="o">.</span><span class="n">getFailure</span><span class="p">()</span>
 
-    <span class="n">pf_mat</span><span class="o">=</span><span class="p">[]</span>
-    <span class="k">for</span> <span class="n">i_rev</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">rev_mat</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
-            <span class="n">E_x2</span> <span class="o">=</span> <span class="p">(</span><span class="n">E_KH_val</span><span class="o">*</span><span class="n">E_alpha_val</span> <span class="o">+</span> <span class="n">nu_KH_alpha</span><span class="p">)</span><span class="o">*</span><span class="n">rev_mat</span><span class="p">[</span><span class="n">i_rev</span><span class="p">];</span>
-            <span class="n">nu_x2</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">E_x2</span><span class="o">*</span><span class="n">rev_mat</span><span class="p">[</span><span class="n">i_rev</span><span class="p">]</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">var_KH_alpha</span><span class="p">);</span>
+    
+    <span class="c1">#rev_mat=np.linspace(rev_min,rev_max,50);</span>
 
-            <span class="n">pf_mat</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">E_theta_val</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">E_x1</span><span class="o">/</span><span class="n">E_x2</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">nu_x1</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-</span>  <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">nu_x2</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">nu_theta_val</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)))</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span> <span class="n">nu_theta_val</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span> <span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span> <span class="n">nu_x1</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span> <span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span> <span class="n">nu_x2</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span> <span class="p">)))</span> <span class="p">)</span>
+    <span class="c1">#pf_mat=[]</span>
+    <span class="c1">#for i_rev in range(rev_mat.shape[0]):</span>
+    <span class="c1">#        E_x2 = (E_KH_val*E_alpha_val + nu_KH_alpha)*rev_mat[i_rev];</span>
+    <span class="c1">#        nu_x2 = 1/E_x2*rev_mat[i_rev]*np.sqrt(var_KH_alpha);</span>
 
-  <span class="c1">#  %matplotlib inline</span>
-  <span class="c1">#  plt.plot(np.log10(rev_mat), pf_mat,&#39;b-&#39;)</span>
-  <span class="c1">#  plt.plot(np.log10(rev_val), pf,&#39;ro&#39;)</span>
-  <span class="c1">#  plt.xlabel(&#39;$log_{10}$(number of revolutions)\n solid lubricant wear model&#39;)</span>
-  <span class="c1">#  plt.ylabel(&#39;Probability of failure $P_f(rev)$&#39;)</span>
-  <span class="c1">#  plt.yscale(&#39;log&#39;)</span>
+    <span class="c1">#       pf_mat.append( norm.cdf((np.log(E_theta_val) - np.log(E_x1/E_x2) + 0.5*(np.log(nu_x1**2 + 1) -  np.log(nu_x2**2 + 1) - np.log(nu_theta_val**2 + 1))) / np.sqrt(np.log( nu_theta_val**2 + 1 ) + np.log( nu_x1**2 + 1 ) + np.log( nu_x2**2 + 1 ))) )</span>
+
+    <span class="c1">#%matplotlib inline</span>
+    <span class="c1">#plt.plot(np.log10(rev_mat), pf_mat,&#39;b-&#39;)</span>
+    <span class="c1">#plt.plot(np.log10(rev_val), pf,&#39;ro&#39;)</span>
+    <span class="c1">#plt.xlabel(&#39;$log_{10}$(number of revolutions)\n solid lubricant wear model&#39;)</span>
+    <span class="c1">#plt.ylabel(&#39;Probability of failure $P_f(rev)$&#39;)</span>
+    <span class="c1">#plt.yscale(&#39;log&#39;)</span>
         
    
-    <span class="k">return</span> <span class="s1">&#39;The probability of failure is pf=</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">pf</span><span class="p">)</span>
+    <span class="k">return</span> <span class="s1">&#39;The probability of failure is pf=</span><span class="si">{}</span><span class="s1"> at </span><span class="si">{}</span><span class="s1"> revolutions&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">pf</span><span class="p">,</span><span class="n">rev_val</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -13268,7 +13299,7 @@ Presently, the distribution type cannot be changed.</p>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># nbi:hide_in</span>
-<span class="n">interact</span><span class="p">(</span><span class="n">proF</span><span class="p">,</span> <span class="n">E_Vlim</span><span class="o">=</span><span class="s1">&#39;6.5e-8&#39;</span><span class="p">,</span> <span class="n">COV_Vlim</span><span class="o">=</span><span class="s1">&#39;0.2&#39;</span><span class="p">,</span> <span class="n">Dist_Vlim</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;LogNormal&#39;</span><span class="p">,</span> <span class="s1">&#39;Normal&#39;</span><span class="p">,</span><span class="s1">&#39;Gumbel&#39;</span><span class="p">},</span> <span class="n">E_KH</span><span class="o">=</span><span class="s1">&#39;4e-15&#39;</span><span class="p">,</span> <span class="n">COV_KH</span><span class="o">=</span><span class="s1">&#39;0.66&#39;</span><span class="p">,</span> <span class="n">Dist_KH</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;LogNormal&#39;</span><span class="p">,</span> <span class="s1">&#39;Normal&#39;</span><span class="p">,</span><span class="s1">&#39;Gumbel&#39;</span><span class="p">},</span> <span class="n">E_alpha</span><span class="o">=</span><span class="s1">&#39;0.018&#39;</span><span class="p">,</span> <span class="n">COV_alpha</span><span class="o">=</span><span class="s1">&#39;0.2&#39;</span><span class="p">,</span> <span class="n">Dist_alpha</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;LogNormal&#39;</span><span class="p">,</span> <span class="s1">&#39;Normal&#39;</span><span class="p">,</span><span class="s1">&#39;Gumbel&#39;</span><span class="p">},</span> <span class="n">E_MU</span><span class="o">=</span><span class="s1">&#39;1.2&#39;</span><span class="p">,</span> <span class="n">COV_MU</span><span class="o">=</span><span class="s1">&#39;0.2&#39;</span><span class="p">,</span> <span class="n">Dist_MU</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;LogNormal&#39;</span><span class="p">,</span> <span class="s1">&#39;Normal&#39;</span><span class="p">,</span><span class="s1">&#39;Gumbel&#39;</span><span class="p">},</span> <span class="n">E_nrev</span><span class="o">=</span><span class="s1">&#39;245e+6&#39;</span><span class="p">);</span>
+<span class="n">interact</span><span class="p">(</span><span class="n">proF</span><span class="p">,</span> <span class="n">E_Vlim</span><span class="o">=</span><span class="s1">&#39;6.5e-8&#39;</span><span class="p">,</span> <span class="n">COV_Vlim</span><span class="o">=</span><span class="s1">&#39;0.2&#39;</span><span class="p">,</span> <span class="n">Dist_Vlim</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;LogNormal&#39;</span><span class="p">,</span> <span class="s1">&#39;Normal&#39;</span><span class="p">,</span><span class="s1">&#39;Gumbel&#39;</span><span class="p">},</span> <span class="n">E_KH</span><span class="o">=</span><span class="s1">&#39;4e-15&#39;</span><span class="p">,</span> <span class="n">COV_KH</span><span class="o">=</span><span class="s1">&#39;0.66&#39;</span><span class="p">,</span> <span class="n">Dist_KH</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;LogNormal&#39;</span><span class="p">,</span> <span class="s1">&#39;Normal&#39;</span><span class="p">,</span><span class="s1">&#39;Gumbel&#39;</span><span class="p">},</span> <span class="n">E_alpha</span><span class="o">=</span><span class="s1">&#39;0.018&#39;</span><span class="p">,</span> <span class="n">COV_alpha</span><span class="o">=</span><span class="s1">&#39;0.2&#39;</span><span class="p">,</span> <span class="n">Dist_alpha</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;LogNormal&#39;</span><span class="p">,</span> <span class="s1">&#39;Normal&#39;</span><span class="p">,</span><span class="s1">&#39;Gumbel&#39;</span><span class="p">},</span> <span class="n">E_MU</span><span class="o">=</span><span class="s1">&#39;1.0&#39;</span><span class="p">,</span> <span class="n">COV_MU</span><span class="o">=</span><span class="s1">&#39;0.2&#39;</span><span class="p">,</span> <span class="n">Dist_MU</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;LogNormal&#39;</span><span class="p">},</span> <span class="n">E_nrev</span><span class="o">=</span><span class="s1">&#39;245e+6&#39;</span><span class="p">);</span>
 </pre></div>
 
     </div>
@@ -13328,7 +13359,7 @@ Presently, the distribution type cannot be changed.</p>
     }
 
     var interact = new window.NbInteract({
-      spec: 'MatthiasSchubert/ReliabilitySpace_Wear_Bearing/main',
+      spec: 'MatthiasSchubert/ReliabilitySpace_Wear_Bearing/master',
       baseUrl: 'https://mybinder.org',
       provider: 'gh',
     })
