@@ -13173,11 +13173,34 @@ For solid lubricant reservoir wear (e.g. cage of a ball bearing), the limit stat
 <span class="kn">from</span> <span class="nn">ipywidgets</span> <span class="kn">import</span> <span class="n">interact</span>
 <span class="kn">import</span> <span class="nn">nbinteract</span> <span class="k">as</span> <span class="nn">nbi</span>
 
+<span class="o">!</span>pip install git+git://github.com/hackl/pyre.git
 <span class="kn">import</span> <span class="nn">pyre</span>
 <span class="kn">from</span> <span class="nn">pyre</span> <span class="kn">import</span> <span class="o">*</span>
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Collecting git+git://github.com/hackl/pyre.git
+  Cloning git://github.com/hackl/pyre.git to /tmp/pip-req-build-4ci60040
+  Running command git clone -q git://github.com/hackl/pyre.git /tmp/pip-req-build-4ci60040
+  Resolved git://github.com/hackl/pyre.git to commit b6b3d40f9b5e57a1c89d88322301f65103fd459d
+Requirement already satisfied: numpy in /srv/conda/envs/notebook/lib/python3.7/site-packages (from pyre==5.0.3) (1.21.2)
+Requirement already satisfied: scipy in /srv/conda/envs/notebook/lib/python3.7/site-packages (from pyre==5.0.3) (1.7.1)
+</pre>
+</div>
+</div>
+
 </div>
 </div>
 
@@ -13359,7 +13382,7 @@ For solid lubricant reservoir wear (e.g. cage of a ball bearing), the limit stat
     }
 
     var interact = new window.NbInteract({
-      spec: 'MatthiasSchubert/ReliabilitySpace_Wear_Bearing/main',
+      spec: 'MatthiasSchubert/ReliabilitySpace_Wear_Bearing/master',
       baseUrl: 'https://mybinder.org',
       provider: 'gh',
     })
