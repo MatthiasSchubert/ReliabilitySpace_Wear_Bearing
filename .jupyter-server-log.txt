@@ -281,3 +281,25 @@ TermSocket.open: Opened 1
 [I 17:00:33.110 NotebookApp] Kernel restarted: f9be12c1-b09c-4c31-a0dd-1db1fa896ea1
 [I 17:00:33.365 NotebookApp] Starting buffering for f9be12c1-b09c-4c31-a0dd-1db1fa896ea1:87588ad7-93f4-4d46-b1b7-54b83c4b5b3e
 [I 17:00:33.610 NotebookApp] Restoring connection for f9be12c1-b09c-4c31-a0dd-1db1fa896ea1:87588ad7-93f4-4d46-b1b7-54b83c4b5b3e
+[W 17:02:19.337 NotebookApp] Culling 'idle' kernel 'python3' (bd9a040b-d6ad-4c0d-b8a6-f2b9bb74afb1) with 1 connections due to 644 seconds of inactivity.
+[I 17:02:19.338 NotebookApp] Kernel shutdown: bd9a040b-d6ad-4c0d-b8a6-f2b9bb74afb1
+[I 17:02:27.546 NotebookApp] Saving file at /index.ipynb
+[W 17:11:19.339 NotebookApp] Culling 'idle' kernel 'python3' (f9be12c1-b09c-4c31-a0dd-1db1fa896ea1) with 1 connections due to 636 seconds of inactivity.
+[I 17:11:19.339 NotebookApp] Kernel shutdown: f9be12c1-b09c-4c31-a0dd-1db1fa896ea1
+[I 17:19:34.373 NotebookApp] Kernel started: f3c7b656-64c4-4756-99bd-5f0c6d2090f9, name: python3
+[I 17:19:37.633 NotebookApp] Saving file at /index.ipynb
+[I 17:20:33.857 NotebookApp] Kernel restarted: f3c7b656-64c4-4756-99bd-5f0c6d2090f9
+[I 17:20:34.061 NotebookApp] Starting buffering for f3c7b656-64c4-4756-99bd-5f0c6d2090f9:61299e48-caeb-4c57-b6ab-7952990bd855
+[I 17:20:34.298 NotebookApp] Restoring connection for f3c7b656-64c4-4756-99bd-5f0c6d2090f9:61299e48-caeb-4c57-b6ab-7952990bd855
+[I 17:21:21.135 NotebookApp] Kernel restarted: f3c7b656-64c4-4756-99bd-5f0c6d2090f9
+[I 17:21:21.260 NotebookApp] Starting buffering for f3c7b656-64c4-4756-99bd-5f0c6d2090f9:61299e48-caeb-4c57-b6ab-7952990bd855
+[I 17:21:21.501 NotebookApp] Restoring connection for f3c7b656-64c4-4756-99bd-5f0c6d2090f9:61299e48-caeb-4c57-b6ab-7952990bd855
+[I 17:21:37.979 NotebookApp] Saving file at /index.ipynb
+[I 17:23:03.249 NotebookApp] Kernel restarted: f3c7b656-64c4-4756-99bd-5f0c6d2090f9
+[I 17:23:03.375 NotebookApp] Starting buffering for f3c7b656-64c4-4756-99bd-5f0c6d2090f9:61299e48-caeb-4c57-b6ab-7952990bd855
+[I 17:23:03.859 NotebookApp] Restoring connection for f3c7b656-64c4-4756-99bd-5f0c6d2090f9:61299e48-caeb-4c57-b6ab-7952990bd855
+[I 17:23:38.621 NotebookApp] Saving file at /index.ipynb
+[I 17:27:33.450 NotebookApp] Kernel restarted: f3c7b656-64c4-4756-99bd-5f0c6d2090f9
+[I 17:27:33.577 NotebookApp] Starting buffering for f3c7b656-64c4-4756-99bd-5f0c6d2090f9:61299e48-caeb-4c57-b6ab-7952990bd855
+[I 17:27:33.961 NotebookApp] Restoring connection for f3c7b656-64c4-4756-99bd-5f0c6d2090f9:61299e48-caeb-4c57-b6ab-7952990bd855
+[I 17:27:39.348 NotebookApp] Saving file at /index.ipynb
