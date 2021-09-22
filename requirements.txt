@@ -3,3 +3,4 @@ ipywidgets
 nbinteract
 scipy
 matplotlib
+git+git://github.com/hackl/pyre.git
