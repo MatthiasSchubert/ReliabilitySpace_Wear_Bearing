@@ -13119,19 +13119,14 @@ div#notebook {
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="reliability.space">reliability.space<a class="anchor-link" href="#reliability.space">&#182;</a></h1><h1 id="Reliability-Prediction---FORM">Reliability Prediction - FORM<a class="anchor-link" href="#Reliability-Prediction---FORM">&#182;</a></h1><h1 id="Bearing:-----solid-lubricant-wear-model">Bearing:     solid lubricant wear model<a class="anchor-link" href="#Bearing:-----solid-lubricant-wear-model">&#182;</a></h1>
+<h1 id="reliability.space">reliability.space<a class="anchor-link" href="#reliability.space">&#182;</a></h1><h2 id="Reliability-Prediction---FORM">Reliability Prediction - FORM<a class="anchor-link" href="#Reliability-Prediction---FORM">&#182;</a></h2><h2 id="Bearing:-----solid-lubricant-wear-model">Bearing:     solid lubricant wear model<a class="anchor-link" href="#Bearing:-----solid-lubricant-wear-model">&#182;</a></h2>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="by-Matthias-Schubert,-2021-09-21">by Matthias Schubert, 2021-09-21<a class="anchor-link" href="#by-Matthias-Schubert,-2021-09-21">&#182;</a></h1>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>For ESA RFP 17225</p>
+<p>For ESA RFP 17225,
+by Matthias Schubert, 2021-09-23</p>
 
 </div>
 </div>
@@ -13191,7 +13186,7 @@ For solid lubricant reservoir wear (e.g. cage of a ball bearing), the limit stat
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># nbi:hide_in</span>
-<span class="k">def</span> <span class="nf">proF</span><span class="p">(</span><span class="n">E_Vlim</span><span class="p">,</span><span class="n">COV_Vlim</span><span class="p">,</span><span class="n">Dist_Vlim</span><span class="p">,</span><span class="n">E_KH</span><span class="p">,</span><span class="n">COV_KH</span><span class="p">,</span><span class="n">Dist_KH</span><span class="p">,</span><span class="n">E_alpha</span><span class="p">,</span><span class="n">COV_alpha</span><span class="p">,</span><span class="n">Dist_alpha</span><span class="p">,</span><span class="n">E_MU</span><span class="p">,</span><span class="n">COV_MU</span><span class="p">,</span><span class="n">Dist_MU</span><span class="p">,</span><span class="n">E_nrev</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">proF</span><span class="p">(</span><span class="n">E_Vlim</span><span class="p">,</span><span class="n">COV_Vlim</span><span class="p">,</span><span class="n">Dist_Vlim</span><span class="p">,</span><span class="n">E_KH</span><span class="p">,</span><span class="n">COV_KH</span><span class="p">,</span><span class="n">Dist_KH</span><span class="p">,</span><span class="n">E_alpha</span><span class="p">,</span><span class="n">COV_alpha</span><span class="p">,</span><span class="n">Dist_alpha</span><span class="p">,</span><span class="n">E_MU</span><span class="p">,</span><span class="n">COV_MU</span><span class="p">,</span><span class="n">Dist_MU</span><span class="p">,</span><span class="n">E_nrev</span><span class="p">,</span><span class="n">Rev_per_hour</span><span class="p">):</span>
     
     <span class="n">E_vlimit_val</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">E_Vlim</span><span class="p">)</span>
     <span class="n">nu_vlimit_val</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">COV_Vlim</span><span class="p">)</span>
@@ -13202,32 +13197,63 @@ For solid lubricant reservoir wear (e.g. cage of a ball bearing), the limit stat
     <span class="n">E_theta_val</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">E_MU</span><span class="p">)</span>
     <span class="n">nu_theta_val</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">COV_MU</span><span class="p">)</span>
     <span class="n">rev_val</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">E_nrev</span><span class="p">)</span>
+    <span class="n">rev_hour</span><span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">Rev_per_hour</span><span class="p">)</span>
 
     <span class="n">rev_min</span><span class="o">=</span><span class="n">rev_val</span><span class="o">*</span><span class="mf">0.5</span><span class="p">;</span>  <span class="c1">#for plotting</span>
     <span class="n">rev_max</span><span class="o">=</span><span class="n">rev_val</span><span class="o">*</span><span class="mi">2</span><span class="p">;</span>  <span class="c1">#for plotting</span>
 
+    <span class="n">mu_R</span><span class="o">=</span><span class="n">E_vlimit_val</span>
+    <span class="n">sigma_R</span><span class="o">=</span><span class="n">E_vlimit_val</span><span class="o">*</span><span class="n">nu_vlimit_val</span>
+    <span class="n">x_R_mat</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">mu_R</span><span class="o">-</span><span class="n">sigma_R</span><span class="o">*</span><span class="mi">4</span><span class="p">,</span><span class="n">mu_R</span><span class="o">+</span><span class="n">sigma_R</span><span class="o">*</span><span class="mi">4</span><span class="p">,</span><span class="mi">50</span><span class="p">);</span> 
+    
+    <span class="n">mu_S</span><span class="o">=</span><span class="n">E_KH_val</span><span class="o">*</span><span class="n">E_alpha_val</span><span class="o">*</span><span class="n">E_theta_val</span><span class="o">*</span><span class="n">rev_val</span>
+    <span class="n">cov_S</span><span class="o">=</span><span class="p">((</span><span class="n">nu_KH_val</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="p">(</span><span class="n">nu_alpha_val</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="p">(</span><span class="n">nu_theta_val</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="mf">0.5</span>
+    <span class="n">sigma_S</span><span class="o">=</span><span class="n">cov_S</span><span class="o">*</span><span class="n">mu_S</span><span class="p">;</span>
+    <span class="n">x_S_mat</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">mu_S</span><span class="o">-</span><span class="n">sigma_S</span><span class="o">*</span><span class="mi">3</span><span class="p">,</span><span class="mf">1e-12</span><span class="p">),</span><span class="n">mu_S</span><span class="o">+</span><span class="n">sigma_S</span><span class="o">*</span><span class="mi">6</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+    <span class="n">zeta_S</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="p">(</span><span class="n">sigma_S</span><span class="o">/</span><span class="n">mu_S</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span><span class="o">**</span><span class="mf">0.5</span>
+    <span class="n">lamb_S</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">mu_S</span><span class="p">)</span> <span class="o">-</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">zeta_S</span><span class="o">**</span><span class="mi">2</span>
+    <span class="n">S_pdf</span><span class="o">=</span><span class="n">pyre</span><span class="o">.</span><span class="n">distributions</span><span class="o">.</span><span class="n">lognormal</span><span class="o">.</span><span class="n">Lognormal</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x_S_mat</span><span class="p">,</span><span class="n">lamb_S</span><span class="p">,</span><span class="n">zeta_S</span><span class="p">)</span>
+    
     <span class="c1">#revolutions per hour</span>
-    <span class="n">rev_hour</span><span class="o">=</span><span class="mi">6</span><span class="p">;</span>
+    <span class="c1">#rev_hour=100;</span>
     <span class="c1">######################################################</span>
 
 
     <span class="c1"># FORM ANALYSIS PyRe</span>
-    <span class="c1"># Define limit state function</span>
-    <span class="n">limit_state</span> <span class="o">=</span> <span class="n">LimitState</span><span class="p">(</span><span class="k">lambda</span> <span class="n">X1</span><span class="p">,</span><span class="n">X2</span><span class="p">,</span><span class="n">X3</span><span class="p">,</span><span class="n">X4</span><span class="p">:</span> <span class="n">X1</span><span class="o">-</span><span class="n">X2</span><span class="o">*</span><span class="n">X3</span><span class="o">*</span><span class="n">X4</span><span class="o">*</span><span class="n">rev_val</span><span class="p">)</span>
+    
+    
     <span class="n">stochastic_model</span> <span class="o">=</span> <span class="n">StochasticModel</span><span class="p">()</span>
     <span class="c1"># Define random variables</span>
     
     <span class="k">if</span> <span class="n">Dist_Vlim</span><span class="o">==</span><span class="s1">&#39;Normal&#39;</span><span class="p">:</span>
         <span class="n">stochastic_model</span><span class="o">.</span><span class="n">addVariable</span><span class="p">(</span> <span class="n">Normal</span><span class="p">(</span><span class="s1">&#39;X1&#39;</span><span class="p">,</span><span class="n">E_vlimit_val</span><span class="p">,</span><span class="n">E_vlimit_val</span><span class="o">*</span><span class="n">nu_vlimit_val</span><span class="p">)</span> <span class="p">)</span>
+        
+        <span class="n">R_pdf</span><span class="o">=</span><span class="n">pyre</span><span class="o">.</span><span class="n">distributions</span><span class="o">.</span><span class="n">normal</span><span class="o">.</span><span class="n">Normal</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x_R_mat</span><span class="p">,</span><span class="n">mu_R</span><span class="p">,</span><span class="n">sigma_R</span><span class="p">)</span>
+        
     <span class="k">elif</span> <span class="n">Dist_Vlim</span><span class="o">==</span><span class="s1">&#39;LogNormal&#39;</span><span class="p">:</span>
         <span class="n">stochastic_model</span><span class="o">.</span><span class="n">addVariable</span><span class="p">(</span> <span class="n">Lognormal</span><span class="p">(</span><span class="s1">&#39;X1&#39;</span><span class="p">,</span><span class="n">E_vlimit_val</span><span class="p">,</span><span class="n">E_vlimit_val</span><span class="o">*</span><span class="n">nu_vlimit_val</span><span class="p">)</span> <span class="p">)</span>
+        
+        
+        <span class="c1">#Lognormal</span>
+        <span class="n">zeta_R</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">nu_vlimit_val</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span><span class="o">**</span><span class="mf">0.5</span>
+        <span class="n">lamb_R</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">mu_R</span><span class="p">)</span> <span class="o">-</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">zeta_R</span><span class="o">**</span><span class="mi">2</span>
+        <span class="n">R_pdf</span><span class="o">=</span><span class="n">pyre</span><span class="o">.</span><span class="n">distributions</span><span class="o">.</span><span class="n">lognormal</span><span class="o">.</span><span class="n">Lognormal</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x_R_mat</span><span class="p">,</span><span class="n">lamb_R</span><span class="p">,</span><span class="n">zeta_R</span><span class="p">)</span>
+    
+        
     <span class="k">elif</span> <span class="n">Dist_Vlim</span><span class="o">==</span><span class="s1">&#39;Gumbel&#39;</span><span class="p">:</span>
         <span class="n">stochastic_model</span><span class="o">.</span><span class="n">addVariable</span><span class="p">(</span> <span class="n">Gumbel</span><span class="p">(</span><span class="s1">&#39;X1&#39;</span><span class="p">,</span><span class="n">E_vlimit_val</span><span class="p">,</span><span class="n">E_vlimit_val</span><span class="o">*</span><span class="n">nu_vlimit_val</span><span class="p">)</span> <span class="p">)</span>
     
+        <span class="c1">#Gumbel</span>
+        <span class="n">a_n_R</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="p">(</span><span class="n">sigma_R</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">6</span><span class="p">))</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">u_n_R</span> <span class="o">=</span> <span class="n">mu_R</span> <span class="o">-</span> <span class="p">(</span><span class="mf">0.5772156649</span><span class="o">*</span><span class="n">sigma_R</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">6</span><span class="p">))</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">R_pdf</span><span class="o">=</span><span class="n">pyre</span><span class="o">.</span><span class="n">distributions</span><span class="o">.</span><span class="n">gumbel</span><span class="o">.</span><span class="n">Gumbel</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x_R_mat</span><span class="p">,</span><span class="n">u_n_R</span><span class="p">,</span><span class="n">a_n_R</span><span class="p">)</span>
+        
     <span class="k">if</span> <span class="n">Dist_KH</span><span class="o">==</span><span class="s1">&#39;Normal&#39;</span><span class="p">:</span>
         <span class="n">stochastic_model</span><span class="o">.</span><span class="n">addVariable</span><span class="p">(</span> <span class="n">Normal</span><span class="p">(</span><span class="s1">&#39;X2&#39;</span><span class="p">,</span><span class="n">E_KH_val</span><span class="p">,</span><span class="n">E_KH_val</span><span class="o">*</span><span class="n">nu_KH_val</span><span class="p">)</span> <span class="p">)</span>
+        
     <span class="k">elif</span> <span class="n">Dist_KH</span><span class="o">==</span><span class="s1">&#39;LogNormal&#39;</span><span class="p">:</span>
         <span class="n">stochastic_model</span><span class="o">.</span><span class="n">addVariable</span><span class="p">(</span> <span class="n">Lognormal</span><span class="p">(</span><span class="s1">&#39;X2&#39;</span><span class="p">,</span><span class="n">E_KH_val</span><span class="p">,</span><span class="n">E_KH_val</span><span class="o">*</span><span class="n">nu_KH_val</span><span class="p">)</span> <span class="p">)</span>
+        
     <span class="k">elif</span> <span class="n">Dist_KH</span><span class="o">==</span><span class="s1">&#39;Gumbel&#39;</span><span class="p">:</span>
         <span class="n">stochastic_model</span><span class="o">.</span><span class="n">addVariable</span><span class="p">(</span> <span class="n">Gumbel</span><span class="p">(</span><span class="s1">&#39;X2&#39;</span><span class="p">,</span><span class="n">E_KH_val</span><span class="p">,</span><span class="n">E_KH_val</span><span class="o">*</span><span class="n">nu_KH_val</span><span class="p">)</span> <span class="p">)</span>
     
@@ -13248,13 +13274,28 @@ For solid lubricant reservoir wear (e.g. cage of a ball bearing), the limit stat
     <span class="c1"># Set some options (optional)</span>
     <span class="n">options</span> <span class="o">=</span> <span class="n">AnalysisOptions</span><span class="p">()</span>
     <span class="c1"># options.printResults(False)</span>
-    
+    <span class="c1">#aplha=computeAlpha()</span>
+
+    <span class="c1"># Define limit state function</span>
+    <span class="n">limit_state</span> <span class="o">=</span> <span class="n">LimitState</span><span class="p">(</span><span class="k">lambda</span> <span class="n">X1</span><span class="p">,</span><span class="n">X2</span><span class="p">,</span><span class="n">X3</span><span class="p">,</span><span class="n">X4</span><span class="p">:</span> <span class="n">X1</span><span class="o">-</span><span class="n">X2</span><span class="o">*</span><span class="n">X3</span><span class="o">*</span><span class="n">X4</span><span class="o">*</span><span class="n">rev_val</span><span class="p">)</span>
     <span class="c1"># Performe FORM analysis</span>
     <span class="n">Analysis</span> <span class="o">=</span> <span class="n">Form</span><span class="p">(</span><span class="n">analysis_options</span><span class="o">=</span><span class="n">options</span><span class="p">,</span> <span class="n">stochastic_model</span><span class="o">=</span><span class="n">stochastic_model</span><span class="p">,</span> <span class="n">limit_state</span><span class="o">=</span><span class="n">limit_state</span><span class="p">)</span>
-
     <span class="c1"># Some single results:</span>
     <span class="n">beta</span> <span class="o">=</span> <span class="n">Analysis</span><span class="o">.</span><span class="n">getBeta</span><span class="p">()</span>
     <span class="n">pf</span> <span class="o">=</span> <span class="n">Analysis</span><span class="o">.</span><span class="n">getFailure</span><span class="p">()</span>
+    
+    
+    
+    <span class="n">pf_mat</span><span class="o">=</span><span class="p">[]</span>
+    <span class="n">rev_mat</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">rev_val</span><span class="o">*</span><span class="mf">0.8</span><span class="p">,</span><span class="n">rev_val</span><span class="o">*</span><span class="mf">1.2</span><span class="p">,</span><span class="mi">5</span><span class="p">);</span> 
+    <span class="c1"># for plot of the &quot;Resistance&quot;</span>
+    <span class="k">for</span> <span class="n">i_rev</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">rev_mat</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+        <span class="c1"># Define limit state function</span>
+        <span class="n">limit_state</span> <span class="o">=</span> <span class="n">LimitState</span><span class="p">(</span><span class="k">lambda</span> <span class="n">X1</span><span class="p">,</span><span class="n">X2</span><span class="p">,</span><span class="n">X3</span><span class="p">,</span><span class="n">X4</span><span class="p">:</span> <span class="n">X1</span><span class="o">-</span><span class="n">X2</span><span class="o">*</span><span class="n">X3</span><span class="o">*</span><span class="n">X4</span><span class="o">*</span><span class="n">rev_mat</span><span class="p">[</span><span class="n">i_rev</span><span class="p">])</span>
+        <span class="c1"># Performe FORM analysis</span>
+        <span class="n">options</span><span class="o">.</span><span class="n">printResults</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">Analysis</span> <span class="o">=</span> <span class="n">Form</span><span class="p">(</span><span class="n">analysis_options</span><span class="o">=</span><span class="n">options</span><span class="p">,</span> <span class="n">stochastic_model</span><span class="o">=</span><span class="n">stochastic_model</span><span class="p">,</span> <span class="n">limit_state</span><span class="o">=</span><span class="n">limit_state</span><span class="p">)</span>
+        <span class="n">pf_mat</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Analysis</span><span class="o">.</span><span class="n">getFailure</span><span class="p">())</span>
 
     
     <span class="c1">#rev_mat=np.linspace(rev_min,rev_max,50);</span>
@@ -13266,15 +13307,28 @@ For solid lubricant reservoir wear (e.g. cage of a ball bearing), the limit stat
 
     <span class="c1">#       pf_mat.append( norm.cdf((np.log(E_theta_val) - np.log(E_x1/E_x2) + 0.5*(np.log(nu_x1**2 + 1) -  np.log(nu_x2**2 + 1) - np.log(nu_theta_val**2 + 1))) / np.sqrt(np.log( nu_theta_val**2 + 1 ) + np.log( nu_x1**2 + 1 ) + np.log( nu_x2**2 + 1 ))) )</span>
 
+    
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
     <span class="c1">#%matplotlib inline</span>
-    <span class="c1">#plt.plot(np.log10(rev_mat), pf_mat,&#39;b-&#39;)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_R_mat</span><span class="p">,</span> <span class="n">R_pdf</span><span class="p">,</span><span class="s1">&#39;g-&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_S_mat</span><span class="p">,</span> <span class="n">S_pdf</span><span class="p">,</span><span class="s1">&#39;r-&#39;</span><span class="p">)</span>
     <span class="c1">#plt.plot(np.log10(rev_val), pf,&#39;ro&#39;)</span>
-    <span class="c1">#plt.xlabel(&#39;$log_{10}$(number of revolutions)\n solid lubricant wear model&#39;)</span>
-    <span class="c1">#plt.ylabel(&#39;Probability of failure $P_f(rev)$&#39;)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Volume [m^3]&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;probability density function&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s1">&#39;Limiting Volume&#39;</span><span class="p">,</span><span class="s1">&#39;Volume worn away&#39;</span><span class="p">])</span>
+
     <span class="c1">#plt.yscale(&#39;log&#39;)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rev_val</span><span class="o">/</span><span class="p">(</span><span class="n">rev_hour</span><span class="o">*</span><span class="mi">365</span><span class="o">*</span><span class="mi">24</span><span class="p">),</span><span class="n">pf</span><span class="p">,</span><span class="s1">&#39;ro&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span> <span class="n">rev_mat</span><span class="o">/</span><span class="p">(</span><span class="n">rev_hour</span><span class="o">*</span><span class="mi">365</span><span class="o">*</span><span class="mi">24</span><span class="p">),</span><span class="n">pf_mat</span><span class="p">,</span><span class="s1">&#39;r--&#39;</span><span class="p">)</span>
         
-   
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;probability of failure&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;years&#39;</span><span class="p">)</span>
+    <span class="c1">#plt.legend([&#39;Limiting Volume&#39;,&#39;Volume worn away&#39;])</span>
+    
     <span class="k">return</span> <span class="s1">&#39;The probability of failure is pf=</span><span class="si">{}</span><span class="s1"> at </span><span class="si">{}</span><span class="s1"> revolutions&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">pf</span><span class="p">,</span><span class="n">rev_val</span><span class="p">)</span>
+   
 </pre></div>
 
     </div>
@@ -13284,7 +13338,7 @@ For solid lubricant reservoir wear (e.g. cage of a ball bearing), the limit stat
   </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Input-values-for-reliability-prediction">Input values for reliability prediction<a class="anchor-link" href="#Input-values-for-reliability-prediction">&#182;</a></h2><h4 id="-Limiting-value-(worn-volume),-$V_{lim}$-$[m^3]$">-Limiting value (worn volume), $V_{lim}$ $[m^3]$<a class="anchor-link" href="#-Limiting-value-(worn-volume),-$V_{lim}$-$[m^3]$">&#182;</a></h4><h4 id="-Specific-wear-rate,-$K_H$-$[Pa^{-1}=m^2/N]$">-Specific wear rate, $K_H$ $[Pa^{-1}=m^2/N]$<a class="anchor-link" href="#-Specific-wear-rate,-$K_H$-$[Pa^{-1}=m^2/N]$">&#182;</a></h4><h4 id="-Ball-cage-interaction,-$\alpha$-$[N/m]$">-Ball-cage interaction, $\alpha$ $[N/m]$<a class="anchor-link" href="#-Ball-cage-interaction,-$\alpha$-$[N/m]$">&#182;</a></h4><h4 id="-Model-uncertainty,-$\Theta$-$[-]$">-Model uncertainty, $\Theta$ $[-]$<a class="anchor-link" href="#-Model-uncertainty,-$\Theta$-$[-]$">&#182;</a></h4><h4 id="-Nominal-number-of-revolutions,-$rev$-$[-\#-]$">-Nominal number of revolutions, $rev$ $[ \# ]$<a class="anchor-link" href="#-Nominal-number-of-revolutions,-$rev$-$[-\#-]$">&#182;</a></h4>
+<h2 id="Input-values-for-reliability-prediction">Input values for reliability prediction<a class="anchor-link" href="#Input-values-for-reliability-prediction">&#182;</a></h2><h4 id="-Limiting-value-(worn-volume),-$V_{lim}$-$[m^3]$,-described-by:-Mean-Value,-Coefficient-of-Variation-and-Distribution">-Limiting value (worn volume), $V_{lim}$ $[m^3]$, described by: Mean Value, Coefficient of Variation and Distribution<a class="anchor-link" href="#-Limiting-value-(worn-volume),-$V_{lim}$-$[m^3]$,-described-by:-Mean-Value,-Coefficient-of-Variation-and-Distribution">&#182;</a></h4><h4 id="-Specific-wear-rate,-$K_H$-$[Pa^{-1}=m^2/N]$-,-described-by:-Mean-Value,-Coefficient-of-Variation-and-Distribution">-Specific wear rate, $K_H$ $[Pa^{-1}=m^2/N]$ , described by: Mean Value, Coefficient of Variation and Distribution<a class="anchor-link" href="#-Specific-wear-rate,-$K_H$-$[Pa^{-1}=m^2/N]$-,-described-by:-Mean-Value,-Coefficient-of-Variation-and-Distribution">&#182;</a></h4><h4 id="-Ball-cage-interaction,-$\alpha$-$[N/m]$-,-described-by:-Mean-Value,-Coefficient-of-Variation-and-Distribution">-Ball-cage interaction, $\alpha$ $[N/m]$ , described by: Mean Value, Coefficient of Variation and Distribution<a class="anchor-link" href="#-Ball-cage-interaction,-$\alpha$-$[N/m]$-,-described-by:-Mean-Value,-Coefficient-of-Variation-and-Distribution">&#182;</a></h4><h4 id="-Model-uncertainty,-$\Theta$-$[-]$-,-described-by:-Mean-Value,-Coefficient-of-Variation,-Lognomal-distribution">-Model uncertainty, $\Theta$ $[-]$ , described by: Mean Value, Coefficient of Variation, Lognomal distribution<a class="anchor-link" href="#-Model-uncertainty,-$\Theta$-$[-]$-,-described-by:-Mean-Value,-Coefficient-of-Variation,-Lognomal-distribution">&#182;</a></h4><h4 id="-Nominal-number-of-revolutions,-$rev$-$[-\#-]$,-described-by:-Integer-Value">-Nominal number of revolutions, $rev$ $[ \# ]$, described by: Integer Value<a class="anchor-link" href="#-Nominal-number-of-revolutions,-$rev$-$[-\#-]$,-described-by:-Integer-Value">&#182;</a></h4><h4 id="-Average-number-of-revolution-per-hour-(for-plotting-only)">-Average number of revolution per hour (for plotting only)<a class="anchor-link" href="#-Average-number-of-revolution-per-hour-(for-plotting-only)">&#182;</a></h4>
 </div>
 </div>
 </div>
@@ -13298,7 +13352,7 @@ For solid lubricant reservoir wear (e.g. cage of a ball bearing), the limit stat
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># nbi:hide_in</span>
-<span class="n">interact</span><span class="p">(</span><span class="n">proF</span><span class="p">,</span> <span class="n">E_Vlim</span><span class="o">=</span><span class="s1">&#39;6.5e-8&#39;</span><span class="p">,</span> <span class="n">COV_Vlim</span><span class="o">=</span><span class="s1">&#39;0.2&#39;</span><span class="p">,</span> <span class="n">Dist_Vlim</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;LogNormal&#39;</span><span class="p">,</span> <span class="s1">&#39;Normal&#39;</span><span class="p">,</span><span class="s1">&#39;Gumbel&#39;</span><span class="p">},</span> <span class="n">E_KH</span><span class="o">=</span><span class="s1">&#39;4e-15&#39;</span><span class="p">,</span> <span class="n">COV_KH</span><span class="o">=</span><span class="s1">&#39;0.66&#39;</span><span class="p">,</span> <span class="n">Dist_KH</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;LogNormal&#39;</span><span class="p">,</span> <span class="s1">&#39;Normal&#39;</span><span class="p">,</span><span class="s1">&#39;Gumbel&#39;</span><span class="p">},</span> <span class="n">E_alpha</span><span class="o">=</span><span class="s1">&#39;0.018&#39;</span><span class="p">,</span> <span class="n">COV_alpha</span><span class="o">=</span><span class="s1">&#39;0.2&#39;</span><span class="p">,</span> <span class="n">Dist_alpha</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;LogNormal&#39;</span><span class="p">,</span> <span class="s1">&#39;Normal&#39;</span><span class="p">,</span><span class="s1">&#39;Gumbel&#39;</span><span class="p">},</span> <span class="n">E_MU</span><span class="o">=</span><span class="s1">&#39;1.0&#39;</span><span class="p">,</span> <span class="n">COV_MU</span><span class="o">=</span><span class="s1">&#39;0.2&#39;</span><span class="p">,</span> <span class="n">Dist_MU</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;LogNormal&#39;</span><span class="p">},</span> <span class="n">E_nrev</span><span class="o">=</span><span class="s1">&#39;245e+6&#39;</span><span class="p">);</span>
+<span class="n">interact</span><span class="p">(</span><span class="n">proF</span><span class="p">,</span> <span class="n">E_Vlim</span><span class="o">=</span><span class="s1">&#39;6.5e-8&#39;</span><span class="p">,</span> <span class="n">COV_Vlim</span><span class="o">=</span><span class="s1">&#39;0.2&#39;</span><span class="p">,</span> <span class="n">Dist_Vlim</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;LogNormal&#39;</span><span class="p">,</span> <span class="s1">&#39;Normal&#39;</span><span class="p">,</span><span class="s1">&#39;Gumbel&#39;</span><span class="p">},</span> <span class="n">E_KH</span><span class="o">=</span><span class="s1">&#39;4e-15&#39;</span><span class="p">,</span> <span class="n">COV_KH</span><span class="o">=</span><span class="s1">&#39;0.66&#39;</span><span class="p">,</span> <span class="n">Dist_KH</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;LogNormal&#39;</span><span class="p">,</span> <span class="s1">&#39;Normal&#39;</span><span class="p">,</span><span class="s1">&#39;Gumbel&#39;</span><span class="p">},</span> <span class="n">E_alpha</span><span class="o">=</span><span class="s1">&#39;0.018&#39;</span><span class="p">,</span> <span class="n">COV_alpha</span><span class="o">=</span><span class="s1">&#39;0.2&#39;</span><span class="p">,</span> <span class="n">Dist_alpha</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;LogNormal&#39;</span><span class="p">,</span> <span class="s1">&#39;Normal&#39;</span><span class="p">,</span><span class="s1">&#39;Gumbel&#39;</span><span class="p">},</span> <span class="n">E_MU</span><span class="o">=</span><span class="s1">&#39;1.0&#39;</span><span class="p">,</span> <span class="n">COV_MU</span><span class="o">=</span><span class="s1">&#39;0.2&#39;</span><span class="p">,</span> <span class="n">Dist_MU</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;LogNormal&#39;</span><span class="p">},</span> <span class="n">E_nrev</span><span class="o">=</span><span class="s1">&#39;245e+6&#39;</span><span class="p">,</span><span class="n">Rev_per_hour</span><span class="o">=</span><span class="s1">&#39;1000&#39;</span><span class="p">);</span>
 </pre></div>
 
     </div>
@@ -13328,23 +13382,6 @@ For solid lubricant reservoir wear (e.g. cage of a ball bearing), the limit stat
 
   </div>
 
-  
-
-  <div class="nbinteract-hide_in
-      cell border-box-sizing code_cell rendered">
-    <div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># nbi:hide_in</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-  </div>
-
 
 
 <!-- Loads nbinteract package -->
@@ -13358,7 +13395,7 @@ For solid lubricant reservoir wear (e.g. cage of a ball bearing), the limit stat
     }
 
     var interact = new window.NbInteract({
-      spec: 'MatthiasSchubert/ReliabilitySpace_Wear_Bearing/main',
+      spec: 'MatthiasSchubert/ReliabilitySpace_Wear_Bearing/master',
       baseUrl: 'https://mybinder.org',
       provider: 'gh',
     })
