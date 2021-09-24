@@ -4,4 +4,3 @@ nbinteract
 scipy
 matplotlib
 git+git://github.com/hackl/pyre.git
-jupyterlab>=1.0
